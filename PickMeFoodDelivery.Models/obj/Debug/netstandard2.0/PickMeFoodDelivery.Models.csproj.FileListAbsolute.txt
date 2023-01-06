@@ -1,0 +1,9 @@
+C:\Users\ashif.mohamed\source\repos\PickMeFoodDelivery\PickMeFoodDelivery.Models\bin\Debug\netstandard2.0\PickMeFoodDelivery.Models.deps.json
+C:\Users\ashif.mohamed\source\repos\PickMeFoodDelivery\PickMeFoodDelivery.Models\bin\Debug\netstandard2.0\PickMeFoodDelivery.Models.dll
+C:\Users\ashif.mohamed\source\repos\PickMeFoodDelivery\PickMeFoodDelivery.Models\obj\Debug\netstandard2.0\PickMeFoodDelivery.Models.csprojAssemblyReference.cache
+C:\Users\ashif.mohamed\source\repos\PickMeFoodDelivery\PickMeFoodDelivery.Models\obj\Debug\netstandard2.0\PickMeFoodDelivery.Models.AssemblyInfoInputs.cache
+C:\Users\ashif.mohamed\source\repos\PickMeFoodDelivery\PickMeFoodDelivery.Models\obj\Debug\netstandard2.0\PickMeFoodDelivery.Models.AssemblyInfo.cs
+C:\Users\ashif.mohamed\source\repos\PickMeFoodDelivery\PickMeFoodDelivery.Models\bin\Debug\netstandard2.0\PickMeFoodDelivery.Models.pdb
+C:\Users\ashif.mohamed\source\repos\PickMeFoodDelivery\PickMeFoodDelivery.Models\obj\Debug\netstandard2.0\PickMeFoodDelivery.Models.csproj.CoreCompileInputs.cache
+C:\Users\ashif.mohamed\source\repos\PickMeFoodDelivery\PickMeFoodDelivery.Models\obj\Debug\netstandard2.0\PickMeFoodDelivery.Models.dll
+C:\Users\ashif.mohamed\source\repos\PickMeFoodDelivery\PickMeFoodDelivery.Models\obj\Debug\netstandard2.0\PickMeFoodDelivery.Models.pdb
