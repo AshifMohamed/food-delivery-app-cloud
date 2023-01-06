@@ -21,41 +21,6 @@ namespace PickMeFoodDelivery.Orders
 
         private const string QueueName = "foodorderqueue";
 
-        [FunctionName("Function1")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
-        {
-            log.LogInformation("C# HTTP trigger function processed a request.");
-
-            string name = req.Query["name"];
-
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
-
-            string responseMessage = string.IsNullOrEmpty(name)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name}. This HTTP triggered function executed successfully.";
-
-            return new OkObjectResult(responseMessage);
-        }
-
-        //[FunctionName("PlaceOrder")]
-        //public static ActionResult PlaceOrder([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "orders")]
-        //HttpRequest req,
-        //    [CosmosDB(
-        //        databaseName:DbName,
-        //        collectionName:ContainerName,
-        //        ConnectionStringSetting = "COSMOSDB")]out dynamic document)
-        //{
-        //    string requestBody = new StreamReader(req.Body).ReadToEnd();
-        //    Order orderC = JsonConvert.DeserializeObject<Order>(requestBody);
-        //    document = orderC;
-
-        //    return new OkObjectResult(orderC);
-        //}
-
         [FunctionName("PlaceOrder")]
         public static ActionResult PlaceOrder([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "orders")]
         HttpRequest req,
@@ -97,8 +62,35 @@ namespace PickMeFoodDelivery.Orders
             }
             else
             {
-                var result = new ObjectResult($"Order {order.Id} not found");
-                result.StatusCode = StatusCodes.Status404NotFound;
+                var result = new ObjectResult($"Order {order.Id} not found")
+                {
+                    StatusCode = StatusCodes.Status404NotFound
+                };
+                return result;
+            }
+        }
+
+        [FunctionName("CancelOrder")]
+        public static IActionResult CancelOrder([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "orders/{orderId}/cancel")] HttpRequest req,
+             [CosmosDB(
+                databaseName:DbName,
+                collectionName:ContainerName,
+                ConnectionStringSetting = "COSMOSDB",
+                Id = "{orderId}",
+                PartitionKey = "{orderId}")] Order order, ILogger log)
+        {
+
+            if (order != null)
+            {
+                order.OrderStatus = OrderStatus.CANCELLED;
+                return new OkObjectResult($"Order {order.Id} Cancelled successfully");
+            }
+            else
+            {
+                var result = new ObjectResult($"Order {order.Id} not found")
+                {
+                    StatusCode = StatusCodes.Status404NotFound
+                };
                 return result;
             }
         }
