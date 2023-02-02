@@ -15,7 +15,7 @@ provider "azurerm" {
 locals {
   resource_group="app-grp"
   location="eastus"
-  other="none"
+  other="nones"
 }
 
 
