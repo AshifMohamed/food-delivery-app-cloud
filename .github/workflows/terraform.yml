@@ -18,7 +18,8 @@ jobs:
       AZURE_ORDER_FUNCTION_APP_NAME: 'functionapporder20230108'
       AZURE_RESTAURANT_FUNCTION_APP_NAME: 'functionapprestaurant20230108'
       AZURE_FUNCTION_APP_PACKAGE_PATH: '.'
-      DOTNET_VERSION: '6.0'
+      DOTNET_VERSION: '3.1.x'
+     # DOTNET_VERSION: '6.0'
 
     runs-on: ubuntu-latest
     environment: production
