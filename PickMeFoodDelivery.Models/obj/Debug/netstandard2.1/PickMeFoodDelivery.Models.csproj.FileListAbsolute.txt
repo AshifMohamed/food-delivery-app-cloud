@@ -1,0 +1,10 @@
+D:\IIT\GitRepo\food-delivery-app-cloud\PickMeFoodDelivery.Models\bin\Debug\netstandard2.1\PickMeFoodDelivery.Models.deps.json
+D:\IIT\GitRepo\food-delivery-app-cloud\PickMeFoodDelivery.Models\bin\Debug\netstandard2.1\PickMeFoodDelivery.Models.dll
+D:\IIT\GitRepo\food-delivery-app-cloud\PickMeFoodDelivery.Models\bin\Debug\netstandard2.1\PickMeFoodDelivery.Models.pdb
+D:\IIT\GitRepo\food-delivery-app-cloud\PickMeFoodDelivery.Models\obj\Debug\netstandard2.1\PickMeFoodDelivery.Models.csproj.AssemblyReference.cache
+D:\IIT\GitRepo\food-delivery-app-cloud\PickMeFoodDelivery.Models\obj\Debug\netstandard2.1\PickMeFoodDelivery.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\IIT\GitRepo\food-delivery-app-cloud\PickMeFoodDelivery.Models\obj\Debug\netstandard2.1\PickMeFoodDelivery.Models.AssemblyInfoInputs.cache
+D:\IIT\GitRepo\food-delivery-app-cloud\PickMeFoodDelivery.Models\obj\Debug\netstandard2.1\PickMeFoodDelivery.Models.AssemblyInfo.cs
+D:\IIT\GitRepo\food-delivery-app-cloud\PickMeFoodDelivery.Models\obj\Debug\netstandard2.1\PickMeFoodDelivery.Models.csproj.CoreCompileInputs.cache
+D:\IIT\GitRepo\food-delivery-app-cloud\PickMeFoodDelivery.Models\obj\Debug\netstandard2.1\PickMeFoodDelivery.Models.dll
+D:\IIT\GitRepo\food-delivery-app-cloud\PickMeFoodDelivery.Models\obj\Debug\netstandard2.1\PickMeFoodDelivery.Models.pdb
