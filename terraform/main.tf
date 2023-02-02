@@ -1,7 +1,7 @@
 terraform {
   backend "azurerm" {
     resource_group_name  = "FoodDelivery_Dev"
-    storage_account_name = "fooddeliverydev_1675280600257"
+    storage_account_name = "fooddeliverydev"
     container_name       = "tfstate"
     key                  = "3x6m//WOZidnpTeVHDmAa1F15gAn3mh222+61yiBaHqsXLRW8ZeOHBdUVxCqRXYPfSD06rjMSUCn+ASth5QIwg=="
   }
