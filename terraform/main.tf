@@ -18,6 +18,20 @@ locals {
   other="nones"
 }
 
+data "azurerm_key_vault" "fooddelivery-dev-vault" {
+  name                = "fooddelivery-dev-vault"
+  resource_group_name = "FoodDelivery_Dev"
+}
+
+data "azurerm_key_vault_secret" "cosmos_db_con" {
+  name      = "COSMOSDB"
+  key_vault_id = data.azurerm_key_vault.fooddelivery-dev-vault.id 
+}
+
+data "azurerm_key_vault_secret" "orderqueue_con" {
+  name      = "PickMeOrderQueue"
+  key_vault_id = data.azurerm_key_vault.fooddelivery-dev-vault.id 
+}
 
 resource "azurerm_resource_group" "app_grp"{
   name=local.resource_group
@@ -50,6 +64,10 @@ resource "azurerm_function_app" "functionapporder20230108" {
   app_service_plan_id        = azurerm_app_service_plan.function_app_plan.id
   storage_account_name       = azurerm_storage_account.functionstore230108.name
   storage_account_access_key = azurerm_storage_account.functionstore230108.primary_access_key
+  app_settings = {
+    COSMOSDB              = "${data.azurerm_key_vault_secret.cosmos_db_con.value}"
+    PickMeOrderQueue      = "${data.azurerm_key_vault_secret.orderqueue_con.value}"
+  }
   site_config {
     dotnet_framework_version = "v6.0"
   }
@@ -62,6 +80,9 @@ resource "azurerm_function_app" "functionapprestaurant20230108" {
   app_service_plan_id        = azurerm_app_service_plan.function_app_plan.id
   storage_account_name       = azurerm_storage_account.functionstore230108.name
   storage_account_access_key = azurerm_storage_account.functionstore230108.primary_access_key
+  app_settings = {
+    COSMOSDB              = "${data.azurerm_key_vault_secret.cosmos_db_con.value}"
+  }
   site_config {
     dotnet_framework_version = "v6.0"
   }
