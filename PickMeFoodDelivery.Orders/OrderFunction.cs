@@ -22,7 +22,7 @@ namespace PickMeFoodDelivery.Orders
         private const string QueueName = "foodorderqueue";
 
         [FunctionName("PlaceOrder")]
-        public static ActionResult PlaceOrder([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "orders")]
+        public static ActionResult PlaceOrder([HttpTrigger(AuthorizationLevel.Function, "post", Route = "orders")]
         HttpRequest req,
            [ServiceBus(QueueName, Connection = "PickMeOrderQueue")] out Order queueMessage)
         {
@@ -47,7 +47,7 @@ namespace PickMeFoodDelivery.Orders
         }
 
         [FunctionName("GetOrderStatus")]
-        public static IActionResult GetOrderStatus([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "orders/{orderId}/status")] HttpRequest req,
+        public static IActionResult GetOrderStatus([HttpTrigger(AuthorizationLevel.Function, "get", Route = "orders/{orderId}/status")] HttpRequest req,
              [CosmosDB(
                 databaseName:DbName,
                 collectionName:ContainerName,
@@ -71,7 +71,7 @@ namespace PickMeFoodDelivery.Orders
         }
 
         [FunctionName("CancelOrder")]
-        public static IActionResult CancelOrder([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "orders/{orderId}/cancel")] HttpRequest req,
+        public static IActionResult CancelOrder([HttpTrigger(AuthorizationLevel.Function, "get", Route = "orders/{orderId}/cancel")] HttpRequest req,
              [CosmosDB(
                 databaseName:DbName,
                 collectionName:ContainerName,
@@ -97,7 +97,7 @@ namespace PickMeFoodDelivery.Orders
 
         [FunctionName("GetOrders")]
         public static IActionResult GetOrders(
-            [HttpTrigger(AuthorizationLevel.System, "get", Route = "orders")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "orders")] HttpRequest req,
              [CosmosDB(
                 databaseName: DbName,
                 collectionName: ContainerName,

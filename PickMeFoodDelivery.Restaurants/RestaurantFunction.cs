@@ -20,7 +20,7 @@ namespace PickMeFoodDelivery.Restaurants
 
         [FunctionName("SearchRestaurant")]
         public static IActionResult SearchRestaurant(
-           [HttpTrigger(AuthorizationLevel.System, "get", Route = "restaurants/searchRestaurant/{restaurantName}")] HttpRequest req,
+           [HttpTrigger(AuthorizationLevel.Function, "get", Route = "restaurants/searchRestaurant/{restaurantName}")] HttpRequest req,
             [CosmosDB(
                 databaseName:DbName,
                 collectionName:ContainerName,
@@ -33,7 +33,7 @@ namespace PickMeFoodDelivery.Restaurants
 
         [FunctionName("GetRestaurants")]
         public static IActionResult GetRestaurants(
-            [HttpTrigger(AuthorizationLevel.System, "get", Route = "restaurants/getRestaurants")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "restaurants/getRestaurants")] HttpRequest req,
              [CosmosDB(
                 databaseName: DbName,
                 collectionName: ContainerName,
