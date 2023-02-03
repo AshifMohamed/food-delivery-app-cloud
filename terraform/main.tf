@@ -25,31 +25,31 @@ data "azurerm_key_vault" "fooddelivery-dev-vault" {
 
 data "azurerm_key_vault_secret" "cosmos_db_con" {
   name      = "COSMOSDB"
-  key_vault_id = data.azurerm_key_vault.fooddelivery-dev-vault.id 
+  key_vault_id = data.azurerm_key_vault.fooddelivery-dev-vault.id
 }
 
 data "azurerm_key_vault_secret" "orderqueue_con" {
   name      = "PickMeOrderQueue"
-  key_vault_id = data.azurerm_key_vault.fooddelivery-dev-vault.id 
+  key_vault_id = data.azurerm_key_vault.fooddelivery-dev-vault.id
 }
 
-resource "azurerm_resource_group" "app_grp"{
-  name=local.resource_group
-  location=local.location
+resource "azurerm_resource_group" "resource_group"{
+  name="${var.project}-${var.environment}-resource-group"
+  location=var.location
 }
 
-resource "azurerm_storage_account" "functionstore230108" {
-  name                     = "functionstore230108"
-  resource_group_name      = azurerm_resource_group.app_grp.name
-  location                 = azurerm_resource_group.app_grp.location
+resource "azurerm_storage_account" "storage_account" {
+  name                     = "${var.project}${var.environment}storage"
+  resource_group_name      = azurerm_resource_group.resource_group.name
+  location                 = var.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
 
-resource "azurerm_app_service_plan" "function_app_plan" {
-  name                = "function-app-plan"
-  location            = azurerm_resource_group.app_grp.location
-  resource_group_name = azurerm_resource_group.app_grp.name
+resource "azurerm_app_service_plan" "app_service_plan" {
+  name                = "${var.project}-${var.environment}-app-service-plan"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.resource_group.name
 
   sku {
     tier = "Standard"
@@ -57,13 +57,13 @@ resource "azurerm_app_service_plan" "function_app_plan" {
   }
 }
 
-resource "azurerm_function_app" "functionapporder20230108" {
+resource "azurerm_function_app" "function_app_order" {
   name                       = "functionapporder20230108"
-  location                   = azurerm_resource_group.app_grp.location
-  resource_group_name        = azurerm_resource_group.app_grp.name
-  app_service_plan_id        = azurerm_app_service_plan.function_app_plan.id
-  storage_account_name       = azurerm_storage_account.functionstore230108.name
-  storage_account_access_key = azurerm_storage_account.functionstore230108.primary_access_key
+  location                   = var.location
+  resource_group_name        = azurerm_resource_group.resource_group.name
+  app_service_plan_id        = azurerm_app_service_plan.app_service_plan.id
+  storage_account_name       = azurerm_storage_account.storage_account.name
+  storage_account_access_key = azurerm_storage_account.storage_account.primary_access_key
   version = "~3"
   app_settings = {
     COSMOSDB              = "${data.azurerm_key_vault_secret.cosmos_db_con.value}"
@@ -74,13 +74,13 @@ resource "azurerm_function_app" "functionapporder20230108" {
   }
 }
 
-resource "azurerm_function_app" "functionapprestaurant20230108" {
+resource "azurerm_function_app" "function_app_restaurant" {
   name                       = "functionapprestaurant20230108"
-  location                   = azurerm_resource_group.app_grp.location
-  resource_group_name        = azurerm_resource_group.app_grp.name
-  app_service_plan_id        = azurerm_app_service_plan.function_app_plan.id
-  storage_account_name       = azurerm_storage_account.functionstore230108.name
-  storage_account_access_key = azurerm_storage_account.functionstore230108.primary_access_key
+  location                   = var.location
+  resource_group_name        = azurerm_resource_group.resource_group.name
+  app_service_plan_id        = azurerm_app_service_plan.app_service_plan.id
+  storage_account_name       = azurerm_storage_account.storage_account.name
+  storage_account_access_key = azurerm_storage_account.storage_account.primary_access_key
   version = "~3"
   app_settings = {
     COSMOSDB              = "${data.azurerm_key_vault_secret.cosmos_db_con.value}"

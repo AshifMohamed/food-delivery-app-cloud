@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'Deploy Azure functions'
 
 on:
   push:
@@ -71,17 +71,12 @@ jobs:
         tf_actions_working_dir: "./terraform"
 
 
-
-    # - name: 'Checkout GitHub Action'
-    #   uses: actions/checkout@v3
-
-  #     If you want to use Azure RBAC instead of Publish Profile,
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }} # set up AZURE_CREDENTIALS secrets in your repository
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+    - name: Setup DotNet Environment
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
@@ -89,21 +84,21 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
 
-    - name: Build Order Function
+    - name: Build Order Azure Function
       run: dotnet build ./PickMeFoodDelivery.Orders --configuration Release --output ./output/orders
 
-    - name: Build Restaurant Function
+    - name: Build Restaurant Azure Function
       run: dotnet build ./PickMeFoodDelivery.Restaurants --configuration Release --output ./output/restaurants
 
-    - name: 'Run Azure Functions Action order'
+    - name: 'Run Azure Order Functions Action'
       uses: Azure/functions-action@v1
       id: fao
       with:
         app-name: ${{ env.AZURE_ORDER_FUNCTION_APP_NAME }}
         package: '${{ env.AZURE_FUNCTION_APP_PACKAGE_PATH }}/output/orders'
-       # publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }} # Remove publish-profile to use Azure RBAC
+       # publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
 
-    - name: 'Run Azure Functions Action restaurant'
+    - name: 'Run Azure Restaurant Functions Action'
       uses: Azure/functions-action@v1
       id: far
       with:
