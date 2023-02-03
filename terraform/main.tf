@@ -64,10 +64,10 @@ resource "azurerm_function_app" "functionapporder20230108" {
   app_service_plan_id        = azurerm_app_service_plan.function_app_plan.id
   storage_account_name       = azurerm_storage_account.functionstore230108.name
   storage_account_access_key = azurerm_storage_account.functionstore230108.primary_access_key
+  version = "~3"
   app_settings = {
     COSMOSDB              = "${data.azurerm_key_vault_secret.cosmos_db_con.value}"
     PickMeOrderQueue      = "${data.azurerm_key_vault_secret.orderqueue_con.value}"
-    functions_extension_version = "~3"
   }
   site_config {
     dotnet_framework_version = "v4.0"
@@ -81,9 +81,9 @@ resource "azurerm_function_app" "functionapprestaurant20230108" {
   app_service_plan_id        = azurerm_app_service_plan.function_app_plan.id
   storage_account_name       = azurerm_storage_account.functionstore230108.name
   storage_account_access_key = azurerm_storage_account.functionstore230108.primary_access_key
+  version = "~3"
   app_settings = {
     COSMOSDB              = "${data.azurerm_key_vault_secret.cosmos_db_con.value}"
-    functions_extension_version = "~3"
   }
   site_config {
     dotnet_framework_version = "v4.0"
